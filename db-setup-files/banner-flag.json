@@ -1,0 +1,46 @@
+{
+  "name": "banner",
+  "description": "Enables maintenance mode",
+  "enabled": false,
+  "strategies": [
+    {
+      "name": "default",
+      "parameters": {}
+    }
+  ],
+  "variants": [
+    {
+      "name": "platinum-user",
+      "weight": 34,
+      "payload": {
+        "type": "string",
+        "value": "Single Step Checkout"
+      },
+      "overrides": [
+        {
+          "contextName": "userId",
+          "values": [
+            "user-1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "gold-users",
+      "weight": 33,
+      "payload": {
+        "type": "string",
+        "value": "Two Step Checkout"
+      }
+    },
+    {
+      "name": "default-checkout",
+      "weight": 33,
+      "payload": {
+        "type": "string",
+        "value": "Default Checkout"
+      }
+    }
+  ],
+  "createdAt": "2020-01-26T19:01:06.586Z"
+}

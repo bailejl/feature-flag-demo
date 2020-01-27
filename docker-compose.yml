@@ -1,0 +1,23 @@
+# From: https://github.com/Unleash/unleash-docker/blob/master/docker-compose.yml
+version: "3.3"
+services:
+  ff_web:
+    image: unleashorg/unleash-server:3.2
+    ports:
+      - "4242:4242"
+    environment:
+      DATABASE_URL: postgres://postgres:unleash@db/postgres
+      NODE_ENV: dev
+    depends_on:
+      - db
+    command: >
+      sh -c "
+        while ! nc -z db 5432; do
+          echo 'Postgres is unavailable.'
+          sleep 1
+        done
+        npm run start"
+  db:
+    expose:
+      - "5432"
+    image: postgres:10-alpine

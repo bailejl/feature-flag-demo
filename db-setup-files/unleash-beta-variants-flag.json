@@ -1,0 +1,12 @@
+{
+  "name": "unleash.beta.variants",
+  "description": "Enables variants in feature flags, as it is a beta feature in Unleash for now",
+  "enabled": true,
+  "strategies": [
+    {
+      "name": "default",
+      "parameters": {}
+    }
+  ],
+  "createdAt": "2020-01-26T19:01:06.586Z"
+}

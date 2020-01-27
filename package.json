@@ -1,0 +1,32 @@
+{
+  "name": "feature-flag-demo",
+  "version": "1.0.0",
+  "description": "Demos common feature flag use cases",
+  "main": "index.html",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.8",
+    "tough-cookie": "^3.0.1",
+    "unleash-client": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "test": "test",
+    "start:feature-flags": "docker-compose up",
+    "load-flags": "node load-flags.js",
+    "start:web": "./node_modules/.bin/nodemon ./index.js 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bailejl/feature-flag-demo.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bailejl/feature-flag-demo/issues"
+  },
+  "homepage": "https://github.com/bailejl/feature-flag-demo#readme"
+}

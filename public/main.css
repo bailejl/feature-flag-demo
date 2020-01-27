@@ -1,0 +1,41 @@
+#main-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+#client-squares {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  width: 90%;
+}
+
+.client-container {
+  margin: 5px;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: center;
+  border: 2px solid darkgrey;
+}
+
+.client-container p {
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+}

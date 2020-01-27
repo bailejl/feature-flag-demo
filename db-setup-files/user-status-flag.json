@@ -1,0 +1,46 @@
+{
+  "name": "user-status",
+  "description": "Enables advance features based on user's status",
+  "enabled": false,
+  "strategies": [
+    {
+      "name": "default",
+      "parameters": {}
+    }
+  ],
+  "variants": [
+    {
+      "name": "platinum-user",
+      "weight": 34,
+      "payload": {
+        "type": "string",
+        "value": "{\"className\", \"platinum\"}"
+      },
+      "overrides": [
+        {
+          "contextName": "userId",
+          "values": [
+            "user-1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "gold-users",
+      "weight": 33,
+      "payload": {
+        "type": "string",
+        "value": "{\"className\", \"gold\"}"
+      }
+    },
+    {
+      "name": "default",
+      "weight": 33,
+      "payload": {
+        "type": "string",
+        "value": "{\"className\", \"default\"}"
+      }
+    }
+  ],
+  "createdAt": "2020-01-26T19:01:06.586Z"
+}

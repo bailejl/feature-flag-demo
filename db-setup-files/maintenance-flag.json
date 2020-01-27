@@ -1,0 +1,30 @@
+{
+  "name": "maintenance",
+  "description": "Enables maintenance mode",
+  "enabled": false,
+  "strategies": [
+    {
+      "name": "default",
+      "parameters": {}
+    }
+  ],
+  "variants": [
+    {
+      "name": "allowed-access",
+      "weight": 100,
+      "payload": {
+        "type": "boolean",
+        "value": "true"
+      },
+      "overrides": [
+        {
+          "contextName": "userId",
+          "values": [
+            "user-1"
+          ]
+        }
+      ]
+    }
+  ],
+  "createdAt": "2020-01-26T19:01:06.586Z"
+}
