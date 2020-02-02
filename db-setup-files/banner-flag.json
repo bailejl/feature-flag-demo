@@ -1,6 +1,6 @@
 {
-  "name": "banner",
-  "description": "Enables maintenance mode",
+  "name": "perm-banner",
+  "description": "Displays a banner, so users can be aware of situations with the app, like upcoming maintenance or system issues.",
   "enabled": false,
   "strategies": [
     {
@@ -10,36 +10,39 @@
   ],
   "variants": [
     {
-      "name": "platinum-user",
-      "weight": 34,
+      "name": "banner-message",
+      "weight": 100,
       "payload": {
-        "type": "string",
-        "value": "Single Step Checkout"
+        "type": "json",
+        "value": "{\"message\": \"Maint. Coming\", \"severity\": \"medium\"}"
       },
       "overrides": [
         {
           "contextName": "userId",
           "values": [
-            "user-1"
+            "user-1",
+            "user-2",
+            "user-3",
+            "user-4",
+            "user-5",
+            "user-6",
+            "user-7",
+            "user-8",
+            "user-9",
+            "user-10",
+            "user-11",
+            "user-12",
+            "user-13",
+            "user-14",
+            "user-15",
+            "user-16",
+            "user-17",
+            "user-18",
+            "user-19",
+            "user-20"
           ]
         }
       ]
-    },
-    {
-      "name": "gold-users",
-      "weight": 33,
-      "payload": {
-        "type": "string",
-        "value": "Two Step Checkout"
-      }
-    },
-    {
-      "name": "default-checkout",
-      "weight": 33,
-      "payload": {
-        "type": "string",
-        "value": "Default Checkout"
-      }
     }
   ],
   "createdAt": "2020-01-26T19:01:06.586Z"

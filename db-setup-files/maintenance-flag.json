@@ -1,5 +1,5 @@
 {
-  "name": "maintenance",
+  "name": "perm-maintenance",
   "description": "Enables maintenance mode",
   "enabled": false,
   "strategies": [
