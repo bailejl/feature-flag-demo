@@ -7,6 +7,10 @@ const flags = [
     handler: maintenanceHandler
   },
   {
+    name: 'perm-kill',
+    handler: killHandler
+  },
+  {
     name: 'perm-banner',
     handler: bannerHandler
   }
@@ -107,8 +111,16 @@ function maintenanceHandler(clientId, flagData){
   }
 }
 
-function bannerHandler(clientId, flagData){
+function killHandler(clientId, flagData){
   console.log(`${clientId}: ${JSON.stringify(flagData)}`);
+  if (flagData.enabled && flagData.payload && flagData.payload.value === 'true') {
+    document.getElementById(`container-${clientId}`).classList.add('kill-mode');
+  } else {
+    document.getElementById(`container-${clientId}`).classList.remove('kill-mode');
+  }
+}
+
+function bannerHandler(clientId, flagData){
   if (flagData.enabled && flagData.payload && flagData.payload.value) {
     const msgObj = JSON.parse(flagData.payload.value);
     document.getElementById(`bottom-bar-${clientId}`).classList.add('show-banner');
