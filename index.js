@@ -29,9 +29,9 @@ app.post('/api/v1/client/:clientId/register', (req, res) => {
     instance.on('ready', console.log);
 
     // metrics hooks
-    instance.on('registered', clientData => console.log(`${clientId} registered`, clientData));
-    instance.on('sent', payload => console.log(`${clientId} metrics bucket/payload sent`, payload));
-    instance.on('count', (name, enabled) => console.log(`${clientId} isEnabled(${name}) returned ${enabled}`));
+    // instance.on('registered', clientData => console.log(`${clientId} registered`, clientData));
+    // instance.on('sent', payload => console.log(`${clientId} metrics bucket/payload sent`, payload));
+    // instance.on('count', (name, enabled) => console.log(`${clientId} isEnabled(${name}) returned ${enabled}`));
     clientFlags[instanceId] = instance;
     res.sendStatus(200);
   } else if (!clientId) {
@@ -54,6 +54,20 @@ app.get('/api/v1/client/:clientId/flags', (req, res) => {
 });
 
 app.get('/api/v1/client/:clientId/flags/:flagName', (req, res) => {
+  const clientId = req.params['clientId'];
+  const flagName = req.params['flagName'];
+  const instanceId = getInstanceId(clientId);
+  if (clientId && clientFlags[instanceId]) {
+    const enabled = clientFlags[instanceId].isEnabled(flagName, { userId: `user-${clientId}` });
+    res.json({flagName: flagName, enabled: enabled});
+  } else if (!clientId) {
+    res.sendStatus(400);
+  } else if (!clientFlags[instanceId]) {
+    res.sendStatus(409);
+  }
+});
+
+app.get('/api/v1/client/:clientId/flags/:flagName/variant', (req, res) => {
   const clientId = req.params['clientId'];
   const flagName = req.params['flagName'];
   const instanceId = getInstanceId(clientId);

@@ -1,0 +1,16 @@
+{
+  "name": "gradual-v2-rollout",
+  "description": "Random gradual rollout of v2 to the users",
+  "enabled": false,
+  "strategies": [
+    {
+      "name": "gradualRolloutUserId",
+      "parameters": {
+        "percentage": "31",
+        "groupId": "gradual-v2-rollout"
+      }
+    }
+  ],
+  "variants": null,
+  "createdAt": "2020-02-02T23:32:43.650Z"
+}

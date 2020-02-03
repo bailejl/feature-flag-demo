@@ -3,16 +3,29 @@ const clientState = {};
 
 const flags = [
   {
+    name: 'date-driven-v3-rollout',
+    handler: v3RolloutHandler,
+    getVariant: false
+  },
+  {
+    name: 'gradual-v2-rollout',
+    handler: v2RolloutHandler,
+    getVariant: false
+  },
+  {
     name: 'perm-maintenance',
-    handler: maintenanceHandler
+    handler: maintenanceHandler,
+    getVariant: true
   },
   {
     name: 'perm-kill',
-    handler: killHandler
+    handler: killHandler,
+    getVariant: true
   },
   {
     name: 'perm-banner',
-    handler: bannerHandler
+    handler: bannerHandler,
+    getVariant: true
   }
 ];
 
@@ -54,7 +67,11 @@ function getLatestClientFlags(clientId) {
       return;
     }
     httpRequest.onreadystatechange = handleClientFeatureFlagsRsp(httpRequest, clientId);
-    httpRequest.open('GET', `/api/v1/client/${clientId}/flags/${flag.name}`);
+    if (flag.getVariant) {
+      httpRequest.open('GET', `/api/v1/client/${clientId}/flags/${flag.name}/variant`);
+    } else {
+      httpRequest.open('GET', `/api/v1/client/${clientId}/flags/${flag.name}`);
+    }
     httpRequest.send();
   });
 }
@@ -85,9 +102,17 @@ function loadSquares() {
     textElement.id = `text`;
     const textNode = document.createTextNode(`${clientId}`);
 
+    const v2 = document.createElement("img");
+    v2.setAttribute('src', '/v1.svg');
+    v2.id = `version-img-${clientId}`;
+    v2.classList.add('icon');
+    topBar.appendChild(v2);
+
     clientContainer.classList.add('client-container');
     topBar.classList.add('top-bar');
     bottomBar.classList.add('bottom-bar');
+
+
     textElement.appendChild(textNode);
     clientContainer.appendChild(topBar);
     clientContainer.appendChild(textElement);
@@ -112,11 +137,24 @@ function maintenanceHandler(clientId, flagData){
 }
 
 function killHandler(clientId, flagData){
-  console.log(`${clientId}: ${JSON.stringify(flagData)}`);
   if (flagData.enabled && flagData.payload && flagData.payload.value === 'true') {
     document.getElementById(`container-${clientId}`).classList.add('kill-mode');
   } else {
     document.getElementById(`container-${clientId}`).classList.remove('kill-mode');
+  }
+}
+
+function v2RolloutHandler(clientId, flagData){
+  console.log(`${clientId}: ${JSON.stringify(flagData)}`);
+  if (flagData.enabled) {
+    document.getElementById(`version-img-${clientId}`).setAttribute('src', '/v2.svg');
+  }
+}
+
+function v3RolloutHandler(clientId, flagData){
+  console.log(`${clientId}: ${JSON.stringify(flagData)}`);
+  if (flagData.enabled) {
+    document.getElementById(`version-img-${clientId}`).setAttribute('src', '/v3.svg');
   }
 }
 

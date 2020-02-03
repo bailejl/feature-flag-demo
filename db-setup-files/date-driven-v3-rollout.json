@@ -1,0 +1,13 @@
+{
+  "name": "date-driven-v3-rollout",
+  "description": "A rollout set to a specific date and time to coordinate with marketing initiative",
+  "enabled": false,
+  "strategies": [
+    {
+      "name": "default",
+      "parameters": {}
+    }
+  ],
+  "variants": null,
+  "createdAt": "2020-02-03T02:48:48.930Z"
+}
