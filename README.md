@@ -31,6 +31,10 @@ Now you can access Unleash and the web app.
 - Unleash will be available at http://localhost:4242
 - Web app is available at http://localhost:3000
 
+# Toggling the Flags
+
+When toggling the flags, give it up to 20 seconds for an effect.  It takes awhile for the change to happen.
+
 # Demo Sequence
 
 1. All users have the same active web experience
