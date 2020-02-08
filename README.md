@@ -13,6 +13,19 @@ was used, since it was an open source feature flag system.  However, to complete
 we exploit the userID and variations with Unleash.  In a production system, we would have implemented our own 
 Unleash strategies.  
 
+# Required Software to Run
+
+- Docker 19.03.5 or higher
+- Node 10.15.1 or higher
+
+# Commands to Run
+
+Run all the commands below from the project root folder.
+
+1. `npm run start:feature-flags`, this starts the DB and Unleash.  This will remain running, so you will need another terminal for the other commands.
+1. `npm run load-flags`, this loads the required data into the DB.
+1. `npm run start:web`, starts the web app simulating 20 different users concurrently using an app.
+
 # Demo Sequence
 
 1. All users have the same active web experience
@@ -35,6 +48,11 @@ Unleash strategies.
 
 
 # Possible Use Cases
+
+Feature flags have mature and have merged with other capabilities like remote configuration and user analytics.  Combined 
+together, feature flags today can support several different use cases across several functional roles.  These functional 
+roles include, project management, DevOps/Operations, development, technical support and much more.  Here is a further
+breakdown of these roles into the use cases.  
 
 ## DevOps/Operations
 
