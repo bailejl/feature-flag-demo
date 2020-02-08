@@ -1,0 +1,64 @@
+{
+  "name": "ab",
+  "description": "Used for A/B testing",
+  "enabled": false,
+  "strategies": [
+    {
+      "name": "default",
+      "parameters": {}
+    }
+  ],
+  "createdAt": "2020-02-08T19:00:34.911Z",
+  "variants": [
+    {
+      "name": "a-variant",
+      "weight": 50,
+      "payload": {
+        "type": "string",
+        "value": "background: black; color: white;"
+      },
+      "overrides": [
+        {
+          "contextName": "userId",
+          "values": [
+            "user-1",
+            "user-3",
+            "user-5",
+            "user-7",
+            "user-9",
+            "user-11",
+            "user-13",
+            "user-15",
+            "user-17",
+            "user-19"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "b-variant",
+      "weight": 50,
+      "payload": {
+        "type": "string",
+        "value": "background: green; color: purple;"
+      },
+      "overrides": [
+        {
+          "contextName": "userId",
+          "values": [
+            "user-2",
+            "user-4",
+            "user-6",
+            "user-8",
+            "user-10",
+            "user-12",
+            "user-14",
+            "user-16",
+            "user-18",
+            "user-20"
+          ]
+        }
+      ]
+    }
+  ]
+}

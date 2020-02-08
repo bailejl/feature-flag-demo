@@ -23,8 +23,13 @@ Unleash strategies.
 Run all the commands below from the project root folder.
 
 1. `npm run start:feature-flags`, this starts the DB and Unleash.  This will remain running, so you will need another terminal for the other commands.
-1. `npm run load-flags`, this loads the required data into the DB.
+1. `npm run load-flags`, this loads the required data into the DB.  This command is idempotent, so it can be run over an over with no issues.
 1. `npm run start:web`, starts the web app simulating 20 different users concurrently using an app.
+
+Now you can access Unleash and the web app.
+
+- Unleash will be available at http://localhost:4242
+- Web app is available at http://localhost:3000
 
 # Demo Sequence
 

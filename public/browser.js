@@ -3,6 +3,11 @@ const clientState = {};
 
 const flags = [
   {
+    name: 'ab',
+    handler: aBHandler,
+    getVariant: true
+  },
+  {
     name: 'date-driven-v3-rollout',
     handler: v3RolloutHandler,
     getVariant: false
@@ -38,6 +43,9 @@ function handleClientFeatureFlagsRsp(httpRequest, clientId){
         if (f) {
           f.handler(clientId, flagData);
         }
+      } else if (httpRequest.status === 409) {
+        console.error(`Reloading page!`);
+        location.reload();
       } else {
         console.error('There was a problem with the request.');
       }
@@ -145,14 +153,12 @@ function killHandler(clientId, flagData){
 }
 
 function v2RolloutHandler(clientId, flagData){
-  console.log(`${clientId}: ${JSON.stringify(flagData)}`);
   if (flagData.enabled) {
     document.getElementById(`version-img-${clientId}`).setAttribute('src', '/v2.svg');
   }
 }
 
 function v3RolloutHandler(clientId, flagData){
-  console.log(`${clientId}: ${JSON.stringify(flagData)}`);
   if (flagData.enabled) {
     document.getElementById(`version-img-${clientId}`).setAttribute('src', '/v3.svg');
   }
@@ -168,5 +174,14 @@ function bannerHandler(clientId, flagData){
     document.getElementById(`bottom-bar-${clientId}`).classList.remove('show-banner');
     document.getElementById(`bottom-bar-${clientId}`).classList.remove(`msg-severity-low`, `msg-severity-medium`, `msg-severity-high`);
     document.getElementById(`bottom-bar-${clientId}`).innerText = '';
+  }
+}
+
+function aBHandler(clientId, flagData){
+  if (flagData.enabled && flagData.payload && flagData.payload.value) {
+    console.log(`${clientId}: ${JSON.stringify(flagData)}`);
+    document.getElementById(`container-${clientId}`).setAttribute('style', flagData.payload.value);
+  } else {
+    document.getElementById(`container-${clientId}`).style = null;
   }
 }
