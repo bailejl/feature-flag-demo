@@ -3,6 +3,11 @@ const clientState = {};
 
 const flags = [
   {
+    name: 'subscription',
+    handler: subscriptionHandler,
+    getVariant: true
+  },
+  {
     name: 'ab',
     handler: aBHandler,
     getVariant: true
@@ -116,6 +121,12 @@ function loadSquares() {
     v2.classList.add('icon');
     topBar.appendChild(v2);
 
+    const sub = document.createElement("div");
+    sub.id = `subscription-${clientId}`;
+    sub.classList.add('subscription');
+    sub.setAttribute('style', 'display: none;');
+    topBar.appendChild(sub);
+
     clientContainer.classList.add('client-container');
     topBar.classList.add('top-bar');
     bottomBar.classList.add('bottom-bar');
@@ -183,5 +194,15 @@ function aBHandler(clientId, flagData){
     document.getElementById(`container-${clientId}`).setAttribute('style', flagData.payload.value);
   } else {
     document.getElementById(`container-${clientId}`).style = null;
+  }
+}
+
+function subscriptionHandler(clientId, flagData){
+  if (flagData.enabled && flagData.payload && flagData.payload.value) {
+    document.getElementById(`subscription-${clientId}`).innerText = flagData.payload.value;
+    document.getElementById(`subscription-${clientId}`).style = null;
+    document.getElementById(`subscription-${clientId}`).classList.add(flagData.payload.value.toLowerCase());
+  } else {
+    document.getElementById(`subscription-${clientId}`).setAttribute('style', 'display: none;');
   }
 }

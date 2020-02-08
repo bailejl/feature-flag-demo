@@ -124,3 +124,13 @@
 .icon {
   height: 15px;
 }
+
+.paid {
+  font-weight: bolder;
+  color: green;
+}
+
+.free {
+  font-weight: bolder;
+  color: red;
+}
