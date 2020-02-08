@@ -3,6 +3,11 @@ const clientState = {};
 
 const flags = [
   {
+    name: 'debug',
+    handler: debugHandler,
+    getVariant: true
+  },
+  {
     name: 'subscription',
     handler: subscriptionHandler,
     getVariant: true
@@ -39,9 +44,18 @@ const flags = [
   }
 ];
 
+let debugClientIds = [];
+
+function debug(message, clientId) {
+  if (debugClientIds.includes(clientId)) {
+    console.debug(`clientId: ${clientId} - ${message}`);
+  }
+}
+
 function handleClientFeatureFlagsRsp(httpRequest, clientId){
   return function() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      debug(httpRequest.status, clientId);
       if (httpRequest.status === 200) {
         const flagData = JSON.parse(httpRequest.responseText);
         const f = flags.find((flag) => flag.name === flagData['flagName']);
@@ -190,7 +204,6 @@ function bannerHandler(clientId, flagData){
 
 function aBHandler(clientId, flagData){
   if (flagData.enabled && flagData.payload && flagData.payload.value) {
-    console.log(`${clientId}: ${JSON.stringify(flagData)}`);
     document.getElementById(`container-${clientId}`).setAttribute('style', flagData.payload.value);
   } else {
     document.getElementById(`container-${clientId}`).style = null;
@@ -204,5 +217,17 @@ function subscriptionHandler(clientId, flagData){
     document.getElementById(`subscription-${clientId}`).classList.add(flagData.payload.value.toLowerCase());
   } else {
     document.getElementById(`subscription-${clientId}`).setAttribute('style', 'display: none;');
+  }
+}
+
+function debugHandler(clientId, flagData){
+  if (flagData.enabled && flagData.payload && flagData.payload.value === 'true') {
+    if (!debugClientIds.includes(clientId)) {
+      debugClientIds.push(clientId);
+    }
+  } else {
+    if (debugClientIds.includes(clientId)) {
+      debugClientIds.splice(debugClientIds.indexOf(clientId), 1);
+    }
   }
 }

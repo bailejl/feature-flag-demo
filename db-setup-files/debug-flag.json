@@ -1,0 +1,64 @@
+{
+  "name": "debug",
+  "description": "Allows to debug specific user sessions when they are having problems.",
+  "strategies": [
+    {
+      "name": "default",
+      "parameters": {}
+    }
+  ],
+  "createdAt": "2020-02-08T19:44:51.940Z",
+  "enabled": false,
+  "variants": [
+    {
+      "name": "target-users",
+      "weight": 50,
+      "overrides": [
+        {
+          "contextName": "userId",
+          "values": [
+            "user-1"
+          ]
+        }
+      ],
+      "payload": {
+        "type": "string",
+        "value": "true"
+      }
+    },
+    {
+      "name": "no-debug",
+      "weight": 50,
+      "payload": {
+        "type": "string",
+        "value": "false"
+      },
+      "overrides": [
+        {
+          "contextName": "userId",
+          "values": [
+            "user-2",
+            "user-3",
+            "user-4",
+            "user-5",
+            "user-6",
+            "user-7",
+            "user-8",
+            "user-9",
+            "user-10",
+            "user-11",
+            "user-12",
+            "user-13",
+            "user-14",
+            "user-15",
+            "user-16",
+            "user-17",
+            "user-18",
+            "user-19",
+            "user-20"
+          ]
+        }
+      ]
+    }
+  ]
+}
